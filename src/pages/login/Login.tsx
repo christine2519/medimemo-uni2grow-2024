@@ -103,9 +103,7 @@ function Login() {
         <form onSubmit={handleLogin}>
           <div className="container2">
             <div className="divTitle">
-              <Typography fontWeight={700} fontSize={20}>
-                Let's Sign You In
-              </Typography>
+              <Typography fontWeight={700}>Let's Sign You In</Typography>
             </div>
             <div className="container3">
               <div className="textfielddiv">
@@ -140,7 +138,9 @@ function Login() {
               </div>
             </div>
             <div className="divforgot">
-              <Link sx={{ color: "black", cursor: "pointer" }}>Forgot Password</Link>
+              <Link sx={{ color: "black", cursor: "pointer" }}>
+                Forgot Password
+              </Link>
             </div>
             <div className="divbutton">
               <Button
@@ -183,7 +183,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="apple" src={a} />
@@ -196,7 +196,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="google" src={g} />
@@ -208,7 +208,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="facebook" src={f} />
