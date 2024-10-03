@@ -27,26 +27,32 @@ function Medication() {
   const [checked, setChecked] = useState<number[]>([]); // Utiliser un tableau d'IDs
   const [message, setMessage] = useState<string | null>(null);
 
+  {
+    /* la couleur du message change en fonction du contenu du message d'erreur */
+  }
+  {
+    message && (
+      <Typography
+        color={message.includes("Successfully") ? "success.main" : "error"}
+      >
+        {message}
+      </Typography>
+    );
+  }
+
   const handleToggle = async (medication: Dose) => {
     try {
-      medication.taken = !medication.taken;
-      const currentIndex = checked.findIndex((id) => id === medication.id);
-      const newChecked = [...checked];
-      if (currentIndex === -1) {
-        newChecked.push(medication.id);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-      setChecked(newChecked);
+      const dose: Dose = { ...medication };
+      dose.taken = !dose.taken;
 
       const requestOptions = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(medication),
+        body: JSON.stringify(dose),
       };
 
       const response = await fetch(
-        "http://localhost:3000/doses/" + medication.id,
+        "http://localhost:3000/doses/" + dose.id,
         requestOptions
       );
 
@@ -54,12 +60,22 @@ function Medication() {
         setMessage("Medication not found in the database.");
         return;
       }
+      setMessage("");
 
       if (!response.ok) {
         throw new Error("Failed to update medication");
       } else {
         const result = await response.json();
         setMessage(`Successfully updated: ${result.therapyName}`);
+        medication.taken = !medication.taken;
+        const currentIndex = checked.findIndex((id) => id === medication.id);
+        const newChecked = [...checked];
+        if (currentIndex === -1) {
+          newChecked.push(medication.id);
+        } else {
+          newChecked.splice(currentIndex, 1);
+        }
+        setChecked(newChecked);
       }
     } catch (error) {
       console.error(error);

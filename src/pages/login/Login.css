@@ -7,15 +7,32 @@ body {
 }
 
 .container {
-  padding: 10px;
   background-color: #F8F4F4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .img {
+
+  width: 24.66px;
+  height: 27.27px;
+  top: 96.74px;
+  left: 199.99px;
+  gap: 0px;
+  opacity: 0px;
+  margin-bottom: 15px;
   margin-top: 10px;
+  margin-top:"88PX";
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  /* margin-top: 10px; 
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+   margin-bottom: 20px; */
 }
 
 .container2 {
@@ -31,7 +48,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .textfielddiv {
