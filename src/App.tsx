@@ -6,8 +6,9 @@ import {
 import { Layout } from "./components/layout/Layout.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
-import { Medications } from "./pages/medications/Medications.tsx";
+import Medications from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
+import Drugspecification from "./pages/drugspecification/Drugspecification";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: "/Therapies",
         element: <Therapies />,
+      },
+
+      {
+        path: "/drugspecification",
+        element: <Drugspecification />,
       },
     ],
   },

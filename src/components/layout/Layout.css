@@ -8,8 +8,11 @@
     width: 100%;
     height: calc(100vh - 105px);
     position: relative;
+    overflow: hidden;
 }
 
 .sub-panel {
   margin: 10px;
+  height: 100%;
+  overflow-y: auto;
 }
