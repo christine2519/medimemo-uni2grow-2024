@@ -8,7 +8,7 @@ import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import Medications from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
-import Drugspecification from "./pages/drugspecification/Drugspecification";
+import Drugspecification from "./pages/drugspecification/Drugspecification.tsx";
 
 const router = createBrowserRouter([
   {
