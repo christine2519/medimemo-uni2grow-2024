@@ -41,12 +41,12 @@ const router = createBrowserRouter([
         path: "/Therapies",
         element: <Therapies />,
       },
-
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
     ],
+  },
+
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
