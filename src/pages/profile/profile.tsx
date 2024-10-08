@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import img1 from "../../assets/images/profile/arrow_left_alt.png";
+import img1 from "../../assets/images/profile/save (1).png";
 import img2 from "../../assets/images/profile/universal_currency.png";
 import img3 from "../../assets/images/profile/12.png";
 import img4 from "../../assets/images/profile/allergies.png";
 import img5 from "../../assets/images/profile/call.png";
 import img6 from "../../assets/images/profile/mail.png";
 import img7 from "../../assets/images/profile/home.png";
+import img8 from "../../assets/images/profile/cancel.png";
+import img9 from "@mui/icons-material/ArrowBackIos";
 import {
   Avatar,
   Typography,
   TextField,
   InputAdornment,
   Button,
+  ListItemText,
 } from "@mui/material";
 import Header from "../../components/header/Header";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useNavigate } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 interface Profile {
   Medical_ID: string;
@@ -36,6 +44,8 @@ function Profile() {
   });
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [activeField, setActiveField] = useState<string | null>(null);
+  const [openLogoutDialog, setOpenLogoutDialog] = useState<boolean>(false);
   const [editID, setEditID] = useState<string>(medecin.Medical_ID);
   const [editState, setEditState] = useState<string>(medecin.state);
   const [editContact, setEditContact] = useState<string>(medecin.contact);
@@ -48,6 +58,10 @@ function Profile() {
   };
 
   const handleSave = () => {
+    setOpenLogoutDialog(true);
+  };
+
+  const handlesaveConfirm = () => {
     setMedecin({
       Medical_ID: editID,
       state: editState,
@@ -55,10 +69,40 @@ function Profile() {
       email: editEmail,
       adresse: editAdresse,
     });
+    setOpenLogoutDialog(false);
     setIsEditing(false);
   };
 
-  const handleLogout = () => {
+  const handlesaveCancel = () => {
+    setOpenLogoutDialog(false);
+  };
+
+  const handleCancel = () => {
+    setEditID(medecin.Medical_ID);
+    setEditState(medecin.state);
+    setEditContact(medecin.contact);
+    setEditEmail(medecin.email);
+    setEditAdresse(medecin.adresse);
+    setIsEditing(false);
+  };
+
+  const handleField = (field: string) => {
+    setActiveField(field);
+  };
+
+  const handleLogoutDialogOpen = () => {
+    setOpenLogoutDialog(true);
+  };
+
+  const handleLogoutCancel = () => {
+    setOpenLogoutDialog(false);
+  };
+
+  const handleLogoutConfirm = () => {
+    navigate("/login");
+  };
+
+  const handlePrev = () => {
     navigate("/login");
   };
 
@@ -69,6 +113,7 @@ function Profile() {
         showBackButton={true}
         showRightButton={!isEditing && true}
         onRightButtonClick={handleIsEditing}
+        onBackButtonClick={handlePrev}
         RightButton={<ModeEditIcon />}
       />
       <div className="page">
@@ -81,87 +126,144 @@ function Profile() {
               <div className="titre">
                 <Typography> Francesca Greco</Typography>
               </div>
-              <div className="textfield">
-                <TextField
-                  disabled={!isEditing}
-                  fullWidth
-                  value={editID}
-                  label="Medical ID"
-                  sx={{ m: 1 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={img2} alt="id" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setEditID(e.target.value)}
-                />
+              <form>
+                <div className="textfield">
+                  <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    id="outlined-basic"
+                    label="Medical_ID"
+                    variant="outlined"
+                    color="error"
+                    value={editID}
+                    sx={{ flex: 1 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={img4} alt="ID" />
+                        </InputAdornment>
+                      ),
 
-                <TextField
-                  disabled={!isEditing}
-                  fullWidth
-                  value={editState}
-                  label="State"
-                  sx={{ m: 1 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={img4} alt="allergie" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setEditState(e.target.value)}
-                />
+                      endAdornment: isEditing && (
+                        <InputAdornment position="end">
+                          <div className="image" onClick={handleCancel}>
+                            <img src={img8} alt="cancel" />
+                          </div>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => setEditState(e.target.value)}
+                  />
 
-                <TextField
-                  disabled={!isEditing}
-                  fullWidth
-                  value={editContact}
-                  label="Phone number"
-                  sx={{ m: 1 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={img5} alt="Phone number" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setEditContact(e.target.value)}
-                />
+                  <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    id="outlined-basic"
+                    label="State"
+                    variant="outlined"
+                    color="error"
+                    value={editState}
+                    sx={{ flex: 1 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={img4} alt="allergie" />
+                        </InputAdornment>
+                      ),
 
-                <TextField
-                  disabled={!isEditing}
-                  fullWidth
-                  value={editEmail}
-                  label="Email"
-                  sx={{ m: 1 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={img6} alt="email" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setEditEmail(e.target.value)}
-                />
+                      endAdornment: isEditing && (
+                        <InputAdornment position="end">
+                          <div className="image" onClick={handleCancel}>
+                            <img src={img8} alt="cancel" />
+                          </div>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => setEditState(e.target.value)}
+                  />
 
-                <TextField
-                  disabled={!isEditing}
-                  fullWidth
-                  value={editAdresse}
-                  label="Adresse"
-                  sx={{ m: 1 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={img7} alt="adresse" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setEditAdresse(e.target.value)}
-                />
-              </div>
+                  <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    id="outlined-basic"
+                    label="Phone Number"
+                    variant="outlined"
+                    color="error"
+                    value={editContact}
+                    sx={{ flex: 1 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={img4} alt="call" />
+                        </InputAdornment>
+                      ),
+
+                      endAdornment: isEditing && (
+                        <InputAdornment position="end">
+                          <div className="image" onClick={handleCancel}>
+                            <img src={img8} alt="cancel" />
+                          </div>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => setEditState(e.target.value)}
+                  />
+
+                  <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    id="outlined-basic"
+                    label="Email"
+                    variant="outlined"
+                    color="error"
+                    value={editEmail}
+                    sx={{ flex: 1 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={img4} alt="allergie" />
+                        </InputAdornment>
+                      ),
+
+                      endAdornment: isEditing && (
+                        <InputAdornment position="end">
+                          <div className="image" onClick={handleCancel}>
+                            <img src={img8} alt="cancel" />
+                          </div>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => setEditState(e.target.value)}
+                  />
+
+                  <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    id="outlined-basic"
+                    label="Adresse"
+                    variant="outlined"
+                    color="error"
+                    value={editAdresse}
+                    sx={{ flex: 1 }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={img4} alt="allergie" />
+                        </InputAdornment>
+                      ),
+
+                      endAdornment: isEditing && (
+                        <InputAdornment position="end">
+                          <div className="image" onClick={handleCancel}>
+                            <img src={img8} alt="cancel" />
+                          </div>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => setEditState(e.target.value)}
+                  />
+                </div>
+              </form>
             </div>
           </div>
           <div className="button">
@@ -170,7 +272,7 @@ function Profile() {
                 <Button
                   fullWidth
                   variant="contained"
-                  onClick={handleLogout}
+                  onClick={handleLogoutDialogOpen}
                   sx={{
                     backgroundColor: "red",
                     color: "white",
@@ -193,12 +295,30 @@ function Profile() {
                   flex: 1,
                 }}
               >
+                <img src={img1} alt="save" />
                 Save
               </Button>
             )}
           </div>
         </div>
       </div>
+      <Dialog open={openLogoutDialog} onClose={handleLogoutCancel}>
+        <DialogTitle>Log-out Confirmation</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to log out? Any unsaved changes will be lost
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogoutCancel} color="primary">
+            <img src="img9" alt="black" />
+            Back
+          </Button>
+          <Button onClick={handleLogoutConfirm} color="primary">
+            Log Out
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

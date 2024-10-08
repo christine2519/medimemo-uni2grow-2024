@@ -36,13 +36,19 @@ border: 1px solid black;
 
 .titre{
     color: var(--Primary-text, #444);
-        text-align: center;
+        /* text-align: center;
         font-family: "Open Sans";
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 140%;
+        line-height: 140%; */
         /* 28px */
+
+        font-family: Open Sans;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 28px;
+            text-align: center;
 }
 
 .edit{
@@ -66,6 +72,11 @@ width: 24px;
     gap: 20px;
     opacity: 0px;
     padding: 20px;
+    width: Fill (310px)px;
+height: Hug (396px)px;
+gap: 20px;
+opacity: 0px;
+
 
 }
 
@@ -89,14 +100,18 @@ width: 24px;
     opacity: 0px;
     width: 100%;
     padding:20px;
+    width: Fill (310px)px;
+        height: Hug (396px)px;
+        
 }
 
 .textfield{
             display: flex;
-                flex-direction: column;
+            flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
+                gap: 20px;
 }
 
 .texfield2{
@@ -119,3 +134,11 @@ width: 24px;
     opacity: 0px;
 
 }
+
+/* .image{
+    width: 20px;
+    height: 20px;
+    gap: 0px;
+    opacity: 0px;
+    margin-left: 500px;
+} */
