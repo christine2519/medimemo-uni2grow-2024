@@ -8,7 +8,9 @@ import img5 from "../../assets/images/profile/call.png";
 import img6 from "../../assets/images/profile/mail.png";
 import img7 from "../../assets/images/profile/home.png";
 import img8 from "../../assets/images/profile/cancel.png";
-import img9 from "@mui/icons-material/ArrowBackIos";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
 import {
   Avatar,
   Typography,
@@ -58,7 +60,7 @@ function Profile() {
   };
 
   const handleSave = () => {
-    setOpenLogoutDialog(true);
+    // setOpenLogoutDialog(true);
   };
 
   const handlesaveConfirm = () => {
@@ -96,6 +98,7 @@ function Profile() {
 
   const handleLogoutCancel = () => {
     setOpenLogoutDialog(false);
+    navigate("/profile");
   };
 
   const handleLogoutConfirm = () => {
@@ -302,23 +305,37 @@ function Profile() {
           </div>
         </div>
       </div>
-      <Dialog open={openLogoutDialog} onClose={handleLogoutCancel}>
-        <DialogTitle>Log-out Confirmation</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to log out? Any unsaved changes will be lost
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleLogoutCancel} color="primary">
-            <img src="img9" alt="black" />
-            Back
-          </Button>
-          <Button onClick={handleLogoutConfirm} color="primary">
-            Log Out
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div className="dialog">
+        <Dialog open={openLogoutDialog} onClose={handleLogoutCancel}>
+          <ReportGmailerrorredIcon />
+          <DialogTitle>Log-out Confirmation</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to log out? Any unsaved changes will be lost
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleLogoutCancel}
+              color="primary"
+              sx={{
+                color: "black",
+              }}
+            >
+              <ArrowBackIosIcon />
+              BACK
+            </Button>
+            <Button
+              onClick={handleLogoutConfirm}
+              color="primary"
+              sx={{ color: "red" }}
+            >
+              <LogoutIcon />
+              Log Out
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 }
