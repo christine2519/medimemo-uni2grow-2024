@@ -7,7 +7,7 @@ import img4 from "../../assets/images/profile/allergies.png";
 import img5 from "../../assets/images/profile/call.png";
 import img6 from "../../assets/images/profile/mail.png";
 import img7 from "../../assets/images/profile/home.png";
-import img8 from "../../assets/images/profile/cancel.png";
+import CancelIcon from "@mui/icons-material/Cancel";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
@@ -101,6 +101,21 @@ function Profile() {
     navigate("/profile");
   };
 
+  const handleClearField = (field: string) => {
+    const resetFunctions: { [key: string]: () => void } = {
+      Medical_ID: () => setEditID(""),
+      State: () => setEditState(""),
+      PhoneNumber: () => setEditContact(""),
+      Email: () => setEditEmail(""),
+      Adresse: () => setEditAdresse(""),
+    };
+
+    // Appelle la fonction de réinitialisation correspondante si elle existe
+    if (resetFunctions[field]) {
+      resetFunctions[field]();
+    }
+  };
+
   const handleLogoutConfirm = () => {
     navigate("/login");
   };
@@ -149,13 +164,20 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div className="image" onClick={handleCancel}>
-                            <img src={img8} alt="cancel" />
+                          <div
+                            className="image"
+                            onClick={() => handleClearField("Medical_ID")}
+                          >
+                            <CancelIcon
+                              sx={{
+                                color: "red",
+                              }}
+                            />
                           </div>
                         </InputAdornment>
                       ),
                     }}
-                    onChange={(e) => setEditState(e.target.value)}
+                    onChange={(e) => setEditID(e.target.value)}
                   />
 
                   <TextField
@@ -176,8 +198,15 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div className="image" onClick={handleCancel}>
-                            <img src={img8} alt="cancel" />
+                          <div
+                            className="image"
+                            onClick={() => handleClearField("State")}
+                          >
+                            <CancelIcon
+                              sx={{
+                                color: "red",
+                              }}
+                            />
                           </div>
                         </InputAdornment>
                       ),
@@ -189,7 +218,7 @@ function Profile() {
                     disabled={!isEditing}
                     fullWidth
                     id="outlined-basic"
-                    label="Phone Number"
+                    label="PhoneNumber"
                     variant="outlined"
                     color="error"
                     value={editContact}
@@ -203,13 +232,20 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div className="image" onClick={handleCancel}>
-                            <img src={img8} alt="cancel" />
+                          <div
+                            className="image"
+                            onClick={() => handleClearField("PhoneNumber")}
+                          >
+                            <CancelIcon
+                              sx={{
+                                color: "red",
+                              }}
+                            />
                           </div>
                         </InputAdornment>
                       ),
                     }}
-                    onChange={(e) => setEditState(e.target.value)}
+                    onChange={(e) => setEditContact(e.target.value)}
                   />
 
                   <TextField
@@ -230,13 +266,20 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div className="image" onClick={handleCancel}>
-                            <img src={img8} alt="cancel" />
+                          <div
+                            className="image"
+                            onClick={() => handleClearField("Email")}
+                          >
+                            <CancelIcon
+                              sx={{
+                                color: "red",
+                              }}
+                            />
                           </div>
                         </InputAdornment>
                       ),
                     }}
-                    onChange={(e) => setEditState(e.target.value)}
+                    onChange={(e) => setEditEmail(e.target.value)}
                   />
 
                   <TextField
@@ -257,13 +300,20 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div className="image" onClick={handleCancel}>
-                            <img src={img8} alt="cancel" />
+                          <div
+                            className="image"
+                            onClick={() => handleClearField("Adresse")}
+                          >
+                            <CancelIcon
+                              sx={{
+                                color: "red",
+                              }}
+                            />
                           </div>
                         </InputAdornment>
                       ),
                     }}
-                    onChange={(e) => setEditState(e.target.value)}
+                    onChange={(e) => setEditAdresse(e.target.value)}
                   />
                 </div>
               </form>
@@ -307,10 +357,28 @@ function Profile() {
       </div>
       <div className="dialog">
         <Dialog open={openLogoutDialog} onClose={handleLogoutCancel}>
-          <ReportGmailerrorredIcon />
-          <DialogTitle>Log-out Confirmation</DialogTitle>
+          <DialogTitle
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              justifyContent: "center",
+              borderRadius: "20px",
+            }}
+          >
+            <ReportGmailerrorredIcon />
+            <h3>Log-out Confirmation</h3>
+          </DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText
+            //   sx={{
+            //     display: "flex",
+            //     alignItems: "center",
+            //     flexDirection: "column",
+            //     justifyContent: "center",
+            //     fontWeight: "bold",
+            //   }}
+            >
               Are you sure you want to log out? Any unsaved changes will be lost
             </DialogContentText>
           </DialogContent>
@@ -323,7 +391,7 @@ function Profile() {
               }}
             >
               <ArrowBackIosIcon />
-              BACK
+              Back
             </Button>
             <Button
               onClick={handleLogoutConfirm}
