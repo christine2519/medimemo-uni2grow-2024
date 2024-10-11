@@ -108,11 +108,12 @@ const router = createBrowserRouter([
         path: "profil",
         element: <Profil />,
       },
-      {
-        path: "/drugspecification",
-        element: <Drugspecification />,
-      },
     ],
+  },
+
+  {
+    path: "/drugspecification",
+    element: <Drugspecification />,
   },
 ]);
 

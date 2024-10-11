@@ -1,93 +1,91 @@
-.backgroung {
-    background-color: #F8F4F4;
-    /* display: flex;
-    width: 390px;
-    padding: 50px 20px 0px 20px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center; */
+.backgroung_drugs {
+  background-color: #fff;
+  
+  display: flex;
+  flex: 1;
+  margin: 20px;
+  gap: 20px;
+  opacity: 0px;
+  padding: 10px 20px;
+
+  /
 }
 
-.entete{
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: var(--Primary-text, #444);
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%;
-    align-self: stretch; 
-    align-items: center;
-        
-}
+
 
 .fleche {
-    margin-right: 100px;
+  margin-right: 100px;
 }
 
-.titre{
-    color: var(--Primary-text, #444);
-        text-align: center;
-        font-family: "Open Sans";
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 140%;
-        
-        
+.titre {
+  color: var(--Primary-text, #444);
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
 }
 
-.body {
-    border: 1px solid black;
+.specification_body {
+  
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px 0px 0px;
+  gap: 40px;
+  border-radius: var(--Radiussm);
+  opacity: 0px;
+
+
 }
 
-.head{
-    display: flex;
-    /* padding: var(--Radius-sm, 8px) 16px; */
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid black;
+.specification_head {
+  
+  gap: 20px;
+  opacity: 0px;
+
+  
 }
 
-.file{
-    color: var(--Colours-White, #FFF);
-    display: flex;
-    align-items: center;
-    border: 1px solid black;
-    background-color: red;
-    
-        font-family: "Work Sans";
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 120%;
-        /* 19.2px */
-        letter-spacing: -0.32px;
+.file {
+  color: var(--Colours-White, #fff);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: red;
+
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+ 
+  letter-spacing: -0.32px;
 }
 
 .elements {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    align-self: stretch;
-    max-height: 100%;
-
-    border: 1px solid black;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  opacity: 0px;
+  
 }
 
-.element1{
-    width: 100%;
-    border: 1px solid black;
-    display: flex;
-        /* padding: 18px 10px 18px 16px; */
-        align-items: center;
-        gap: 20px;
-        align-self: stretch;
+.element1 {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.elt {
+  background-color: #f4f4f4;
+  width: 100%;
 }

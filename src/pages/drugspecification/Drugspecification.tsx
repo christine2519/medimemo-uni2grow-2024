@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Drugspecification.css";
 import { Typography } from "@mui/material";
-import img1 from "../../assets/images/drug specification/arrow_left_alt.png";
 import img2 from "../../assets/images/drug specification/file_save.png";
-//import img2 from "../../assets/images/drug specification/Frame 2608538.png";
 import {
   ListItem,
   ListItemAvatar,
@@ -11,100 +9,56 @@ import {
   Avatar,
   ListItemButton,
   List,
-  ListItemIcon,
   Collapse,
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import ImageIcon from "@mui/icons-material/Image";
-import StarBorder from "@mui/icons-material/StarBorder";
+import Header from "../../components/header/Header";
+
+interface Drug {
+  dosage: string;
+  methodOfAdministraion: string;
+  contraindications: string;
+  warning: string;
+  sideEffects: string;
+  interactions: string;
+  storage: string;
+}
+
+const data: Drug = {
+  dosage: "30 mg/tablet, 1 tablet daily",
+  methodOfAdministraion: `- For ophtalmic use only
+   - Shake the bottle well defore use
+   - Tilt head back, pull down the lowed eyelid, and apply drops
+   - Avoid touching the dropper tip to any surface, including the eye`,
+  contraindications: "none",
+  warning: "none",
+  sideEffects: "none",
+  interactions: "none",
+  storage: "room temperature",
+};
 
 function DrugSpecification() {
+  const [open, setOpen] = useState<{ [key: string]: boolean }>({});
 
-  
-  const [open, setOpen] = useState(false);
-
-  const data1: any = {
-    id: 1,
-    name: "Dosage",
-    description: "",
-  };
-
-  const data2: any = {
-    id: 2,
-    name: "Method of Administration",
-    description: "",
-  };
-
-  const data3: any = {
-    id: 3,
-    name: "Contraindications",
-    description: "",
-  };
-
-  const data4: any = {
-    id: 4,
-    name: "Warnings",
-    description: "",
-  };
-
-  const data5: any = {
-    id: 5,
-    name: "Side Effects",
-    description: "",
-  };
-
-  const data6: any = {
-    id: 6,
-    name: "Interactions",
-    description: "",
-  };
-
-  const data7: any = {
-    id: 7,
-    name: "Storage",
-    description: "",
-  };
-
-  const tab: any[] = [data1, data2, data3, data4, data5, data6, data7];
-
-  const tabOpen: boolean[] = [];
-  tab.forEach((element) => {
-    tabOpen.push(false);
-  });
-
-  const handleClick = (items: any) => {
-    setOpen;
+  const handleClick = (key: string) => {
+    setOpen((prevState) => ({
+      ...prevState,
+      [key]: !open[key],
+    }));
   };
 
   return (
-    <div className="profile_container">
-      <Header
-        title="My Profile"
-        showBackButton={true}
-        showRightButton={!isEditing && true}
-        onRightButtonClick={handleIsEditing}
-        onBackButtonClick={handlePrev}
-        RightButton={<ModeEditIcon />}
-      />
+    <div className="drug_container">
+      <Header title="DROP sept" showBackButton={true} />
 
-
-      <div className="backgroung">
-        <div className="entete">
-          <div className="fleche">
-            <img src={img1} alt="fleche" />
-          </div>
-          <div className="titre">
-            <Typography> DROP sept </Typography>
-          </div>
-        </div>
-
-        <div className="body">
-          <div className="head">
+      <div className="backgroung_drugs">
+        <div className="specification_body">
+          <div className="specification_head">
             <div className="file">
               <ListItem>
                 <ListItemAvatar>
-                  <Avatar alt="file" src={img2} />
+                  <img alt="file" src={img2} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={<Typography>Information Leaflet</Typography>}
@@ -130,32 +84,25 @@ function DrugSpecification() {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                {/* affichage des elements  */}
-                {tab.map((items) => {
+                {Object.entries(data).map(([key, value]) => {
                   return (
-                    <div>
-                      <ListItemButton
-                        sx={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                        onClick={handleClick}
-                      >
-                        <Typography>{items.name}</Typography>
-                        {open ? <ExpandLess /> : <ExpandMore />}
+                    <div className="elt">
+                      <ListItemButton onClick={() => handleClick(key)}>
+                        <ListItemText
+                          disableTypography
+                          primary={key}
+                          sx={{ fontFamily: "sans-serif" }}
+                        />
+                        {open[key] ? <ExpandLess /> : <ExpandMore />}
                       </ListItemButton>
                       <Collapse
-                        key={items}
-                        // in={open}
+                        in={open[key]}
+                        key={key}
                         timeout="auto"
                         unmountOnExit
+                        sx={{ p: "15px" }}
                       >
-                        <List component="div" disablePadding>
-                          <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemText primary="" />
-                          </ListItemButton>
-                        </List>
+                        <div>{value}</div>
                       </Collapse>
                     </div>
                   );
@@ -165,7 +112,7 @@ function DrugSpecification() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
