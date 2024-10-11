@@ -71,14 +71,8 @@ function DrugSpecification() {
     tabOpen.push(false);
   });
 
-  const getbool = (items: any): boolean => {
-    const index: number = tab.findIndex(items);
-    return tabOpen[tab[index]];
-  };
-
   const handleClick = (items: any) => {
-    const index: number = tab.findIndex(items);
-    tabOpen[index] = !tabOpen[index];
+    setOpen;
   };
 
   return (
