@@ -1,99 +1,26 @@
-import React, { useEffect, useState } from "react";
-import img1 from "../../assets/images/medications/profile.png";
-import img4 from "../../assets/images/medications/pill.png";
 import "./Medications.css";
-import {
-  Typography,
-  ListItemAvatar,
-  ListItemButton,
-  Avatar,
-  ListItemText,
-  Checkbox,
-} from "@mui/material";
-import { CircleOutlined, CheckCircle } from "@mui/icons-material";
+import List from "@mui/material/List";
+import logo from "../../assets/images/avatar.svg";
+import Avatar from "@mui/material/Avatar";
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { IDose } from "../../models/Dose";
+import ShowDose from "../../components/dose/ShowDose";
 
-interface Dose {
-  id: number;
-  therapyName: string;
-  time: string;
-  date: string;
-  taken: boolean;
-  therapy: number;
-  prescriptionTime: number;
-}
-
-function Medication() {
-  const [medications, setMedications] = useState<Dose[]>([]);
-  const [checked, setChecked] = useState<number[]>([]); // Utiliser un tableau d'IDs
-  const [message, setMessage] = useState<string | null>(null);
-
-  {
-    /* la couleur du message change en fonction du contenu du message d'erreur */
-  }
-  {
-    message && (
-      <Typography
-        color={message.includes("Successfully") ? "success.main" : "error"}
-      >
-        {message}
-      </Typography>
-    );
-  }
-
-  const handleToggle = async (medication: Dose) => {
-    try {
-      const dose: Dose = { ...medication };
-      dose.taken = !dose.taken;
-
-      const requestOptions = {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dose),
-      };
-
-      const response = await fetch(
-        "http://localhost:3000/doses/" + dose.id,
-        requestOptions
-      );
-
-      if (response.status === 404) {
-        setMessage("Medication not found in the database.");
-        return;
-      }
-      setMessage("");
-
-      if (!response.ok) {
-        throw new Error("Failed to update medication");
-      } else {
-        const result = await response.json();
-        setMessage(`Successfully updated: ${result.therapyName}`);
-        medication.taken = !medication.taken;
-        const currentIndex = checked.findIndex((id) => id === medication.id);
-        const newChecked = [...checked];
-        if (currentIndex === -1) {
-          newChecked.push(medication.id);
-        } else {
-          newChecked.splice(currentIndex, 1);
-        }
-        setChecked(newChecked);
-      }
-    } catch (error) {
-      console.error(error);
-      setMessage("An error occurred while updating the medication.");
-    }
-  };
+function Medications() {
+  const [medications, setMedications] = useState<IDose[]>([]);
+  const [checked, setChecked] = useState<IDose[]>(medications);
+  const [error, setError] = useState<string>("");
+  const [errorUpdate, setErrorUpdate] = useState<string>("");
 
   const getMedication = async (): Promise<void> => {
     try {
-      const result = await fetch("http://localhost:3000/doses");
-      if (!result.ok) {
-        throw new Error("Erreur lors de la récupération des médications");
-      }
-      const datas: Dose[] = await result.json();
-      setMedications(datas);
-    } catch (error) {
-      console.error("Erreur dans getMedication :", error);
-      setMessage("Failed to fetch medications.");
+      setError("");
+      const response = await fetch("http://localhost:3000/doses");
+      const data = await response.json();
+      setMedications(data);
+    } catch {
+      setError("Failed to load medications");
     }
   };
 
@@ -101,74 +28,125 @@ function Medication() {
     getMedication();
   }, []);
 
-  const dates = new Date();
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const handleClick = (medication: IDose) => {
+    handleToggle(medication);
   };
 
-  const formattedDate = dates.toLocaleDateString("en-US", options);
+  const handleToggle = async (medication: IDose) => {
+    try {
+      const dose: IDose = { ...medication };
+      dose.taken = !dose.taken;
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dose),
+      };
+      setErrorUpdate("");
+      const result = await fetch(
+        "http://localhost:3000/doses/" + dose.id,
+        requestOptions
+      );
+      if (result.ok) {
+        medication.taken = !medication.taken;
+        const currentIndex = checked.findIndex((x) => x.id === medication.id);
+        const newChecked = [...checked];
+        if (currentIndex === -1) {
+          newChecked.push(medication);
+        } else {
+          newChecked.splice(currentIndex, 1);
+        }
+        setChecked(newChecked);
+      }
+    } catch {
+      setErrorUpdate("Failed to update medication");
+    }
+  };
+
+  function emptyDoses(doses: IDose[]): boolean {
+    return doses.length === 0;
+  }
+  function isNull(error: string): boolean {
+    return error === "";
+  }
+
+  const printDate = () => {
+    const dateObj = new Date();
+    return dateObj.toLocaleDateString("en-UK", { dateStyle: "full" });
+  };
 
   return (
-    <div className="background">
-      <div className="head">
-        <div className="profile">
-          <img src={img1} alt="profile" />
+    <div className="medications-container">
+      <div className="head-container">
+        <Avatar src={logo} alt="Avatar" sx={{ width: 75, height: 75 }} />
+        <div className="title">
+          <Typography variant="h6">Hi, Francesca</Typography>
+          <Typography variant="subtitle1">
+            Your Medicines Reminders for today!
+          </Typography>
         </div>
-        <Typography>Hi, Francesca</Typography>
-        <Typography>Your Medicine Reminders for Today!</Typography>
       </div>
-      <div className="body">
-        <Typography>{formattedDate}</Typography>
-        {message && <Typography color="error">{message}</Typography>}
-        <div className="element">
-          {medications.length === 0 ? (
-            <Typography>No medications available.</Typography>
+      <div className="seond-container">
+        <Typography variant="h6" sx={{ mx: "20px", mt: "20px" }}>
+          {printDate()}
+        </Typography>
+
+        <div className="all-list">
+          {!isNull(error) ? (
+            <Typography sx={{ color: "red" }}>{error}</Typography>
+          ) : emptyDoses(medications) ? (
+            <div className="empty-doses">
+              <Typography sx={{ margin: "20px" }}>
+                No Doses available
+              </Typography>
+            </div>
           ) : (
-            medications.map((item) => (
-              <div className="element1" key={item.id}>
-                <ListItemButton
-                  sx={{
-                    backgroundColor: !item.taken
-                      ? "rgba(77, 216, 167, 0.1)"
-                      : "transparent",
-                  }}
-                  onClick={() => handleToggle(item)}
-                  dense
-                >
-                  <ListItemAvatar>
-                    <Avatar alt="pill" src={img4} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        sx={{ color: "text.primary", display: "inline", pb: 0 }}
-                      >
-                        {item.therapyName} {item.time}
-                      </Typography>
-                    }
-                    secondary={
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        sx={{ color: "text.primary", display: "inline" }}
-                      >
-                        CONJUNCTIVITIS
-                      </Typography>
-                    }
-                  />
-                  <Checkbox
-                    icon={<CircleOutlined />}
-                    checkedIcon={<CheckCircle />}
-                    checked={checked.includes(item.id)}
-                  />
-                </ListItemButton>
-              </div>
-            ))
+            <List
+              disablePadding
+              dense
+              sx={{
+                mx: "20px",
+                mb: "20px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "25px",
+              }}
+            >
+              {errorUpdate && (
+                <Typography color="error">{errorUpdate}</Typography>
+              )}
+              {medications.filter((item) => item.taken).length != 0 && (
+                <div className="sub-list">
+                  {medications
+                    .filter((item) => item.taken)
+                    .map((item) => {
+                      return (
+                        <ShowDose
+                          handleToggle={handleToggle}
+                          item={item}
+                          key={item.id}
+                          handleClick={handleClick}
+                        />
+                      );
+                    })}
+                </div>
+              )}
+              {medications.filter((item) => !item.taken).length != 0 && (
+                <div className="sub-list">
+                  {medications
+                    .filter((item) => !item.taken)
+                    .map((item) => {
+                      return (
+                        <ShowDose
+                          handleToggle={handleToggle}
+                          item={item}
+                          key={item.id}
+                          handleClick={handleClick}
+                        />
+                      );
+                    })}
+                </div>
+              )}
+            </List>
           )}
         </div>
       </div>
@@ -176,4 +154,4 @@ function Medication() {
   );
 }
 
-export default Medication;
+export default Medications;
