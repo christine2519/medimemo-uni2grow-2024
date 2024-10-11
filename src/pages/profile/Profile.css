@@ -1,145 +1,142 @@
-.profile_container{
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.page{
-    background-color: #f8f4f4 ;
+.page {
+  overflow: auto;
+  background-color: #f8f4f4;
 }
 
-.contenu{
-width: Fixed (350px)px;
-    height: Hug (693px)px;
-    top: 96px;
-    left: 20px;
-    padding: 40px 20px 40px 20px;
-    gap: 40px;
-    border-radius: var(--Radiussm);
-    opacity: 0px;
-    border: 1px solid black;
+.contenu {
+  width: Fixed (350px) px;
+  height: Hug (693px) px;
+  top: 96px;
+  left: 20px;
+  padding: 40px 20px 40px 20px;
+  gap: 40px;
+  border-radius: var(--Radiussm);
+  opacity: 0px;
+
+  /* border: 1px solid black; */
 }
 
-.entete{
-    width: 16px;
-        height: 12px;
-        top: 6px;
-        left: 4px;
-        gap: 0px;
-        opacity: 0px;
-    margin-right: auto;
-    display: flex;
-        align-items: center;
-        flex-direction: column;
-border: 1px solid black;
+.entete {
+  width: 16px;
+  height: 12px;
+  top: 6px;
+  left: 4px;
+  gap: 0px;
+  opacity: 0px;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid black; */
 }
 
-.titre{
-    color: var(--Primary-text, #444);
-        /* text-align: center;
-        font-family: "Open Sans";
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 140%; */
-        /* 28px */
+.titre {
+  color: var(--Primary-text, #444);
 
-        font-family: Open Sans;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 28px;
-            text-align: center;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.edit{
-    width: 24px;
-        height: 24px;
-    margin-right: 500px;
+.edit {
+  width: 24px;
+  height: 24px;
+  margin-right: 500px;
 }
 
-.fleche{
-width: 24px;
-    height: 24px;
-    margin-left: 500px;
+.fleche {
+  width: 24px;
+  height: 24px;
+  margin-left: 500px;
 }
 
-.corps{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid black;
-    gap: 20px;
-    opacity: 0px;
-    padding: 20px;
-    width: Fill (310px)px;
-height: Hug (396px)px;
-gap: 20px;
-opacity: 0px;
-
-
+.corps {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  gap: 20px;
+  padding: 20px;
+  width: Fill (310px) px;
+  height: Hug (496px) px;
+  gap: 20px;
 }
 
-.button{
-    width: Fill (310px)px;
-    height: Hug (37px)px;
-    padding: 10px 0px 10px 0px;
-    gap: 10px;
-    border-radius: var(--Radiusxs);
-    opacity: 0px;
-    color: red;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
-            
+.button {
+  width: Fill (310px) px;
+  height: Hug (37px) px;
+  padding: 10px 0px 10px 0px;
+  gap: 10px;
+  border-radius: var(--Radiusxs);
+  opacity: 0px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
 }
 
-.texte{
-    flex: 1;
-    gap: 20px;
-    opacity: 0px;
-    width: 100%;
-    padding:20px;
-    width: Fill (310px)px;
-        height: Hug (396px)px;
-        gap: 20px;
-        opacity: 0px;
+.texte {
+  flex: 1;
+  gap: 20px;
+  opacity: 0px;
+  width: 100%;
+  padding: 20px;
+  width: Fill (310px) px;
+  height: Hug (396px) px;
+  gap: 20px;
+  opacity: 0px;
 }
 
-.textfield{
-            display: flex;
-            flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                gap: 20px;
+.textfield {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
 }
 
-.texfield2{
-    width: Fill (310px)px;
-        height: Hug (60px)px;
-        padding: 18px 10px 18px 16px;
-        gap: 20px;
-        border-radius: var(--Radiusxs);
-        border: 1px 0px 0px 0px;
-        opacity: 0px;
+.texfield2 {
+  width: Fill (310px) px;
+  height: Hug (60px) px;
+  padding: 18px 10px 18px 16px;
+  gap: 20px;
+  border-radius: var(--Radiusxs);
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
 }
 
 .texfield1 {
-    width: Fill (310px)px;
-    height: Hug (60px)px;
-    padding: 18px 10px 18px 16px;
-    gap: 20px;
-    border-radius: var(--Radiusxs);
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
-
+  width: Fill (310px) px;
+  height: Hug (60px) px;
+  padding: 18px 10px 18px 16px;
+  gap: 20px;
+  border-radius: var(--Radiusxs);
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
 }
 
-.dialog{
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-border-radius: 500px;
+.photo {
+  position: relative;
+  /* margin-bottom: 50%; */
 }
+.borderColor {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+/* .camera{
+    color: "red";
+    border-radius:  50%;
+    position: "absolute";
+} */

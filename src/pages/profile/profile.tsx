@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Profile.css";
 import img1 from "../../assets/images/profile/save (1).png";
 import img2 from "../../assets/images/profile/universal_currency.png";
-import img3 from "../../assets/images/profile/12.png";
+import img3 from "../../assets/images/profile/3d_avatar_12.svg";
 import img4 from "../../assets/images/profile/allergies.png";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import img5 from "../../assets/images/profile/call.png";
 import img6 from "../../assets/images/profile/mail.png";
 import img7 from "../../assets/images/profile/home.png";
@@ -11,14 +12,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
-import {
-  Avatar,
-  Typography,
-  TextField,
-  InputAdornment,
-  Button,
-  ListItemText,
-} from "@mui/material";
+import { Typography, TextField, InputAdornment, Button } from "@mui/material";
 import Header from "../../components/header/Header";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +54,7 @@ function Profile() {
   };
 
   const handleSave = () => {
-    // setOpenLogoutDialog(true);
+    setOpenLogoutDialog(true);
   };
 
   const handlesaveConfirm = () => {
@@ -121,7 +115,7 @@ function Profile() {
   };
 
   const handlePrev = () => {
-    navigate("/login");
+    navigate(-1);
   };
 
   return (
@@ -138,7 +132,21 @@ function Profile() {
         <div className="contenu">
           <div className="corps">
             <div className="photo">
-              <img src={img3} alt="photo" />
+              <div className="profile">
+                <img src={img3} width="120px" height="120px" alt="photo" />
+              </div>
+              <div className="camera">
+                <PhotoCameraIcon
+                  sx={{
+                    color: "white",
+                    bottom: "1px",
+                    backgroundColor: "red",
+                    borderRadius: "50%",
+                    position: "absolute",
+                    left: "90px",
+                  }}
+                />
+              </div>
             </div>
             <div className="texte">
               <div className="titre">
@@ -147,18 +155,33 @@ function Profile() {
               <form>
                 <div className="textfield">
                   <TextField
-                    disabled={!isEditing}
                     fullWidth
                     id="outlined-basic"
-                    label="Medical_ID"
+                    label="Medical ID"
                     variant="outlined"
                     color="error"
                     value={editID}
                     sx={{ flex: 1 }}
+                    name="Medical ID"
+                    // error={!!errors.username}
+                    // helperText={errors.username}
+                    onChange={(e) => setEditID(e.target.value)}
+                  />
+                  {/* <TextField
+                    disabled={!isEditing}
+                    fullWidth
+                    color="error"
+                    // disabled={isEditing}
+                    label={!isEditing ? "Medical_ID" : null}
+                    value={editID}
+                    sx={{ flex: 1 }}
                     InputProps={{
+                      sx: {
+                        opacity: !isEditing ? "1" : "1",
+                      },
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={img4} alt="ID" />
+                          <img src={img2} alt="ID" />
                         </InputAdornment>
                       ),
 
@@ -178,12 +201,11 @@ function Profile() {
                       ),
                     }}
                     onChange={(e) => setEditID(e.target.value)}
-                  />
+                  /> */}
 
                   <TextField
                     disabled={!isEditing}
                     fullWidth
-                    id="outlined-basic"
                     label="State"
                     variant="outlined"
                     color="error"
@@ -217,16 +239,17 @@ function Profile() {
                   <TextField
                     disabled={!isEditing}
                     fullWidth
-                    id="outlined-basic"
                     label="PhoneNumber"
                     variant="outlined"
                     color="error"
                     value={editContact}
-                    sx={{ flex: 1 }}
+                    sx={{
+                      flex: 1,
+                    }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={img4} alt="call" />
+                          <img src={img5} alt="call" />
                         </InputAdornment>
                       ),
 
@@ -251,7 +274,6 @@ function Profile() {
                   <TextField
                     disabled={!isEditing}
                     fullWidth
-                    id="outlined-basic"
                     label="Email"
                     variant="outlined"
                     color="error"
@@ -260,7 +282,7 @@ function Profile() {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={img4} alt="allergie" />
+                          <img src={img6} alt="allergie" />
                         </InputAdornment>
                       ),
 
@@ -285,7 +307,6 @@ function Profile() {
                   <TextField
                     disabled={!isEditing}
                     fullWidth
-                    id="outlined-basic"
                     label="Adresse"
                     variant="outlined"
                     color="error"
@@ -294,7 +315,7 @@ function Profile() {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={img4} alt="allergie" />
+                          <img src={img7} alt="allergie" />
                         </InputAdornment>
                       ),
 
