@@ -155,53 +155,41 @@ function Profile() {
               <form>
                 <div className="textfield">
                   <TextField
+                    disabled={!isEditing}
                     fullWidth
-                    id="outlined-basic"
-                    label="Medical ID"
+                    label="Medical_ID"
                     variant="outlined"
                     color="error"
                     value={editID}
-                    sx={{ flex: 1 }}
-                    name="Medical ID"
-                    // error={!!errors.username}
-                    // helperText={errors.username}
-                    onChange={(e) => setEditID(e.target.value)}
-                  />
-                  {/* <TextField
-                    disabled={!isEditing}
-                    fullWidth
-                    color="error"
-                    // disabled={isEditing}
-                    label={!isEditing ? "Medical_ID" : null}
-                    value={editID}
-                    sx={{ flex: 1 }}
+                    sx={{
+                      flex: 1,
+                    }}
                     InputProps={{
-                      sx: {
-                        opacity: !isEditing ? "1" : "1",
-                      },
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={img2} alt="ID" />
+                          <img src={img5} alt="call" />
                         </InputAdornment>
                       ),
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div
-                            className="image"
-                            onClick={() => handleClearField("Medical_ID")}
-                          >
-                            <CancelIcon
-                              sx={{
-                                color: "red",
-                              }}
-                            />
-                          </div>
+                          {editID && (
+                            <div
+                              className="image"
+                              onClick={() => handleClearField("Medical_ID")}
+                            >
+                              <CancelIcon
+                                sx={{
+                                  color: "red",
+                                }}
+                              />
+                            </div>
+                          )}
                         </InputAdornment>
                       ),
                     }}
                     onChange={(e) => setEditID(e.target.value)}
-                  /> */}
+                  />
 
                   <TextField
                     disabled={!isEditing}
@@ -220,16 +208,18 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div
-                            className="image"
-                            onClick={() => handleClearField("State")}
-                          >
-                            <CancelIcon
-                              sx={{
-                                color: "red",
-                              }}
-                            />
-                          </div>
+                          {editState && (
+                            <div
+                              className="image"
+                              onClick={() => handleClearField("State")}
+                            >
+                              <CancelIcon
+                                sx={{
+                                  color: "red",
+                                }}
+                              />
+                            </div>
+                          )}
                         </InputAdornment>
                       ),
                     }}
@@ -255,16 +245,18 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div
-                            className="image"
-                            onClick={() => handleClearField("PhoneNumber")}
-                          >
-                            <CancelIcon
-                              sx={{
-                                color: "red",
-                              }}
-                            />
-                          </div>
+                          {editContact && (
+                            <div
+                              className="image"
+                              onClick={() => handleClearField("PhoneNumber")}
+                            >
+                              <CancelIcon
+                                sx={{
+                                  color: "red",
+                                }}
+                              />
+                            </div>
+                          )}
                         </InputAdornment>
                       ),
                     }}
@@ -288,16 +280,18 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div
-                            className="image"
-                            onClick={() => handleClearField("Email")}
-                          >
-                            <CancelIcon
-                              sx={{
-                                color: "red",
-                              }}
-                            />
-                          </div>
+                          {editEmail && (
+                            <div
+                              className="image"
+                              onClick={() => handleClearField("Email")}
+                            >
+                              <CancelIcon
+                                sx={{
+                                  color: "red",
+                                }}
+                              />
+                            </div>
+                          )}
                         </InputAdornment>
                       ),
                     }}
@@ -321,16 +315,18 @@ function Profile() {
 
                       endAdornment: isEditing && (
                         <InputAdornment position="end">
-                          <div
-                            className="image"
-                            onClick={() => handleClearField("Adresse")}
-                          >
-                            <CancelIcon
-                              sx={{
-                                color: "red",
-                              }}
-                            />
-                          </div>
+                          {editAdresse && (
+                            <div
+                              className="image"
+                              onClick={() => handleClearField("Adresse")}
+                            >
+                              <CancelIcon
+                                sx={{
+                                  color: "red",
+                                }}
+                              />
+                            </div>
+                          )}
                         </InputAdornment>
                       ),
                     }}
