@@ -151,7 +151,7 @@ function Login() {
                   backgroundColor: "red",
                   color: "white",
                   fontWeight: "bold",
-                  flex: 1
+                  flex: 1,
                 }}
                 type="submit"
               >

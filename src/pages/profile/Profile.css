@@ -18,8 +18,6 @@
   gap: 40px;
   border-radius: var(--Radiussm);
   opacity: 0px;
-
-  /* border: 1px solid black; */
 }
 
 .entete {
@@ -33,7 +31,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* border: 1px solid black; */
 }
 
 .titre {
@@ -64,7 +61,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid black; */
   gap: 20px;
   padding: 20px;
   width: Fill (310px) px;
@@ -128,15 +124,4 @@
 
 .photo {
   position: relative;
-  /* margin-bottom: 50%; */
 }
-.borderColor {
-  border: 2px solid red;
-  border-radius: 2px;
-}
-
-/* .camera{
-    color: "red";
-    border-radius:  50%;
-    position: "absolute";
-} */
