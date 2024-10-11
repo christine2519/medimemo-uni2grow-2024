@@ -20,6 +20,8 @@ import ImageIcon from "@mui/icons-material/Image";
 import StarBorder from "@mui/icons-material/StarBorder";
 
 function DrugSpecification() {
+
+  
   const [open, setOpen] = useState(false);
 
   const data1: any = {
@@ -76,7 +78,17 @@ function DrugSpecification() {
   };
 
   return (
-    <>
+    <div className="profile_container">
+      <Header
+        title="My Profile"
+        showBackButton={true}
+        showRightButton={!isEditing && true}
+        onRightButtonClick={handleIsEditing}
+        onBackButtonClick={handlePrev}
+        RightButton={<ModeEditIcon />}
+      />
+
+
       <div className="backgroung">
         <div className="entete">
           <div className="fleche">
