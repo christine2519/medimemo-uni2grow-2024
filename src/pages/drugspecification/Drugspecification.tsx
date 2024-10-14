@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./Drugspecification.css";
-import { Typography } from "@mui/material";
+import { Box, BoxClassKey, Typography } from "@mui/material";
 import img2 from "../../assets/images/drug specification/file_save.png";
 import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Avatar,
   ListItemButton,
   List,
   Collapse,
@@ -14,6 +13,7 @@ import {
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Header from "../../components/header/Header";
+import { useNavigate } from "react-router-dom";
 
 interface Drug {
   dosage: string;
@@ -39,6 +39,12 @@ const data: Drug = {
 };
 
 function DrugSpecification() {
+  const navigate = useNavigate();
+
+  const handlePrev = () => {
+    navigate(-1);
+  };
+
   const [open, setOpen] = useState<{ [key: string]: boolean }>({});
 
   const handleClick = (key: string) => {
@@ -50,7 +56,11 @@ function DrugSpecification() {
 
   return (
     <div className="drug_container">
-      <Header title="DROP sept" showBackButton={true} />
+      <Header
+        title="DROP sept"
+        showBackButton={true}
+        onBackButtonClick={handlePrev}
+      />
 
       <div className="backgroung_drugs">
         <div className="specification_body">

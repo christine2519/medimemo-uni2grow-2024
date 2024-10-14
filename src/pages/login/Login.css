@@ -7,7 +7,7 @@ body {
 }
 
 .login-container {
-  background-color: #F8F4F4;
+  background-color: #f8f4f4;
   flex: 1;
 }
 
@@ -25,6 +25,7 @@ body {
   justify-content: center;
   margin: 10px 20px;
   padding: 0px 20px;
+  margin-right: 20px;
 }
 
 .divTitle {
@@ -86,7 +87,7 @@ span {
   align-items: center;
   padding-bottom: 30px;
   gap: 10px;
-  padding: 10px
+  padding: 10px;
 }
 
 .error {
